@@ -14,10 +14,11 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2024-09-01',
 
-  supabase: {
-    redirectOptions: {
-      login: '/',
-      callback: '/confirm',
-    },
+supabase: {
+  redirectOptions: {
+    login: '/signin',
+    callback: '/confirm',
+    exclude: ['/', '/signin', '/confirm'],
   },
+},
 })

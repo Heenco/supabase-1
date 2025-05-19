@@ -9,23 +9,35 @@ watchEffect(() => {
     navigateTo('/tasks')
   }
 })
+
+// Email/password state and handler
+const email = ref('')
+const password = ref('')
+
+async function handleEmailSignIn() {
+  const { error } = await auth.signInWithPassword({ email: email.value, password: password.value })
+  if (error) {
+    // You can show a toast or error message here
+    alert(error.message)
+  }
+}
 </script>
 
 <template>
-  <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-    <h2 class="my-6 text-center text-3xl font-extrabold">
-      Sign in to your account
-    </h2>
-    <LoginCard>
+  <div class="min-h-full flex flex-col justify-center items-center py-12 sm:px-6 lg:px-8">
+    <h1 class="text-4xl font-extrabold mb-4 text-center">
+      Welcome to the Nuxt + Supabase Demo
+    </h1>
+    <p class="text-lg text-center mb-8 max-w-xl">
+      This is a demo application showcasing authentication with Supabase and Nuxt. You can sign in using your email, GitHub, or Google account to access your tasks.
+    </p>
+    <NuxtLink to="/signin">
       <UButton
-        class="mt-3"
-        icon="i-mdi-github"
-        block
-        label="Github"
-        color="gray"
+        label="Sign In"
+        color="primary"
+        size="lg"
         variant="solid"
-        @click="auth.signInWithOAuth({ provider: 'github', options: { redirectTo } })"
       />
-    </LoginCard>
+    </NuxtLink>
   </div>
 </template>
